@@ -45,7 +45,7 @@ public class ScraperHelper {
                 .collect(java.util.stream.Collectors.toList());
 
         if (parts.isEmpty()) return null;
-        if (parts.size() == 1) return parts.get(0);
+        if (parts.size() == 1) return parts.getFirst();
 
         // Für mehrere Werte (z. B. Listen) Zeilenweise zurückgeben.
         return String.join("\n", parts);
