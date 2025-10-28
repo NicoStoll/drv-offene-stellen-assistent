@@ -11,6 +11,7 @@ public class OpenJobOffersDto {
     String compensation;
     String typeOfEmployment; // Vollzeit/Teilzeit
     String tenderNumber;
+    
     String tasks;
     String areaOfActivity;
     String applicationProfile;
