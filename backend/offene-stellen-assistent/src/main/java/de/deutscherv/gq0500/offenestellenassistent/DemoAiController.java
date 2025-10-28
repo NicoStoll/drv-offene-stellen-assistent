@@ -13,12 +13,14 @@ public class DemoAiController {
         this.chatClient = builder.build();
     }
 
-    @GetMapping
-    public String ask(@RequestBody PromptRequestModel prompt) {
-        return this.chatClient
+    @PostMapping
+    public PromptResponseModel ask(@RequestBody PromptRequestModel prompt) {
+        String response = this.chatClient
                 .prompt()
                 .user(prompt.getPrompt())
                 .call()
                 .content();
+
+        return new PromptResponseModel(response);
     }
 }

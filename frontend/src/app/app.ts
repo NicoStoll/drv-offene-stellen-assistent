@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { BotButton } from './bot-button/bot-button';
+import { Sidenav } from './sidenav/sidenav';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [BotButton, Sidenav],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
