@@ -36,7 +36,7 @@ public class ScraperHelper {
 
         // HTML der Value-Nodes zu Text mit bewahrten <br> und Listen umbrechen
         String merged = valueNodes.stream()
-                .map(e->htmlNormalizer.htmlToReadableText(e))
+                .map(e -> htmlNormalizer.htmlToReadableText(e))
                 .collect(Collectors.joining("\n"))
                 .trim();
 
@@ -51,6 +51,23 @@ public class ScraperHelper {
         if (fieldItem == null) return null;
 
         return htmlNormalizer.normalizeLines((htmlNormalizer.htmlToReadableText(fieldItem)));
+    }
+
+    public String extractFurtherInformation(Document doc) {
+        // Greift alle .field__item im Block mit H2 "Weitere Informationen"
+        Elements items = doc.select(
+                ".textAreaContent:has(h2.jobTextHeader:matches(^\\s*Weitere Informationen\\s*$)) .field__item"
+        );
+        if (items.isEmpty()) return null;
+
+        // Mit deinem HtmlNormalizer in gut lesbaren Text konvertieren (Listen, Absätze etc.)
+        String merged = items.stream()
+                .map(htmlNormalizer::htmlToReadableText) // behält \n und -/1. für Listen bei
+                .map(htmlNormalizer::normalizeLines)
+                .collect(Collectors.joining("\n\n"))
+                .trim();
+
+        return merged;
     }
 
     public String textOrNull(Element e) {

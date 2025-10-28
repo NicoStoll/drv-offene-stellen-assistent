@@ -46,7 +46,7 @@ public class JobOfferScraper {
         dto.setTasks(helper.sectionText(doc, "Aufgaben"));
         dto.setAreaOfActivity(helper.sectionText(doc, "Tätigkeitsbereich"));
         dto.setApplicationProfile(helper.sectionText(doc, "Profil"));
-        dto.setFurtherInformation(helper.sectionText(doc, "Weitere Informationen"));
+        dto.setFurtherInformation(helper.extractFurtherInformation(doc));
 
         return dto;
     }
