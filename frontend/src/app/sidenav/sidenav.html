@@ -1,0 +1,42 @@
+@if (this.chat.isOpen()) {
+  <!-- Chat Window -->
+  <div
+    class="fixed bottom-4 right-4 h-90rem w-[28rem] bg-white shadow-2xl flex flex-col z-40 rounded-lg transition-transform duration-300"
+    [class.right-4]="true"
+    [style.top]="'2rem'"
+  >
+    <!-- Header -->
+    <div class="bg-blue-500 text-white p-4 font-semibold flex justify-between items-center rounded-t-lg">
+      Chat
+      <button class="text-white font-bold" (click)="toggleChat()">✕</button>
+    </div>
+
+    <!-- Messages Area -->
+    <div class="flex-1 p-4 overflow-y-auto space-y-2">
+      @for (msg of this.chat.chatHistory(); track msg) {
+        @if (msg.sender === 'bot') {
+          <app-bot-speech-bubble [message]="msg.message"></app-bot-speech-bubble>
+        } @else {
+          <app-user-speech-bubble [message]="msg.message"></app-user-speech-bubble>
+        }
+      }
+    </div>
+
+    <!-- Input Area -->
+    <div class="p-4 border-t border-gray-200 flex">
+      <input
+        type="text"
+        placeholder="Type a message..."
+        [formControl]="messageControl"
+        class="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+      <button
+        class="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+        (click)="sendMessage()"
+      >
+        Send
+      </button>
+    </div>
+  </div>
+}
+
