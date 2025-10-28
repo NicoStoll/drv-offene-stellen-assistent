@@ -2,9 +2,12 @@ package de.deutscherv.gq0500.offenestellenassistent.webScraping;
 
 import lombok.Data;
 
+import javax.lang.model.element.NestingKind;
+
 @Data
-public class OpenJobOffer {
+public class JobOffer {
     String title;
+
     String location;
     String entryDate;
     String applicationDeadline;
@@ -15,4 +18,5 @@ public class OpenJobOffer {
     String tasks;
     String areaOfActivity;
     String applicationProfile;
+    String furtherInformation;
 }
