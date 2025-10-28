@@ -27,7 +27,7 @@ public class JobLinkScraper {
 
         while (url != null) {
             Document doc = Jsoup.connect(url)
-                    .userAgent("DRV-Scraper/1.0 (+contact: you@domain)")
+                    .userAgent("DRV-Scraper/1.0 (+contact: contact@deutscherv.de)")
                     .referrer("https://www.google.com")
                     .timeout(timeOut)
                     .get();
