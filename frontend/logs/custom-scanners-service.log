@@ -31,3 +31,18 @@
 2025-10-28T12:26:40.105+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.WeakCryptoGolang=CustomScannersServiceScanRule{rule (truncated)...]
 2025-10-28T12:26:40.268+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
 2025-10-28T12:26:40.530+01:00  INFO 482345 --- [Thread-0] c.h.a.s.s.services.ArticleResource       : Completed reading English articles
+2025-10-28T14:54:58.238+01:00 DEBUG 482345 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={multipart}
+2025-10-28T14:54:58.289+01:00 DEBUG 482345 --- [http-nio-9221-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2025-10-28T14:54:58.327+01:00 DEBUG 482345 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json]
+2025-10-28T14:54:58.333+01:00 DEBUG 482345 --- [http-nio-9221-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[]}]
+2025-10-28T14:54:58.337+01:00 DEBUG 482345 --- [http-nio-9221-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-28T14:55:24.770+01:00 DEBUG 482345 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={multipart}
+2025-10-28T14:55:24.772+01:00 DEBUG 482345 --- [http-nio-9221-exec-3] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2025-10-28T14:55:24.809+01:00 DEBUG 482345 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json]
+2025-10-28T14:55:24.810+01:00 DEBUG 482345 --- [http-nio-9221-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[]}]
+2025-10-28T14:55:24.812+01:00 DEBUG 482345 --- [http-nio-9221-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-28T14:55:51.952+01:00 DEBUG 482345 --- [http-nio-9221-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/v1/scanFile", parameters={multipart}
+2025-10-28T14:55:51.956+01:00 DEBUG 482345 --- [http-nio-9221-exec-4] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#runScanFile(MultipartFile, String, int[])
+2025-10-28T14:55:52.007+01:00 DEBUG 482345 --- [http-nio-9221-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json]
+2025-10-28T14:55:52.007+01:00 DEBUG 482345 --- [http-nio-9221-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [CustomScannerServiceResult{findings=[]}]
+2025-10-28T14:55:52.009+01:00 DEBUG 482345 --- [http-nio-9221-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
