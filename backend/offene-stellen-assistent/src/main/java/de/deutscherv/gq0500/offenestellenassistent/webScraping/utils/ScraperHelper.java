@@ -15,8 +15,7 @@ public class ScraperHelper {
     @Autowired
     private HtmlNormalizer htmlNormalizer;
 
-    public String getValueByLabel(Document doc, String label) {
-        // Primär: exakte Label-Box finden
+    public String getValueByLabel(org.jsoup.nodes.Document doc, String label) {
         Element box = doc.selectFirst(
                 ".jobAdMIDtlContainer .jobAdMItextCnt:has(p.globalText.bold:matches(^\\s*"
                         + Pattern.quote(label) + "\\s*$))"
@@ -24,23 +23,32 @@ public class ScraperHelper {
         if (box == null) {
             return null;
         }
-        // Alles außer dem Label selbst als „Wert“
-        // Einige Werte liegen in <div.globalText>, andere (z. B. Ausschreibungsnummer) in .field__item
-        Elements valueNodes = box.select("> .globalText:not(.bold), .field__item");
+
+        org.jsoup.select.Elements valueNodes = box.select(
+                "> .globalText:not(.bold), > .field__item, > .field > .field__item"
+        );
+
         if (valueNodes.isEmpty()) {
-            // Fallback: nimm den ganzen Block ohne das Label, bereinigt
-            Element copy = box.clone();
+            // Fallback: ganzen Block ohne Label nehmen
+            org.jsoup.nodes.Element copy = box.clone();
             copy.select("p.globalText.bold").remove();
             return htmlNormalizer.normalizeLines(htmlNormalizer.extractTextWithLineBreaks(copy));
         }
 
-        // HTML der Value-Nodes zu Text mit bewahrten <br> und Listen umbrechen
-        String merged = valueNodes.stream()
+        // 3) Texte extrahieren, normalisieren und deduplizieren
+        java.util.List<String> parts = valueNodes.stream()
                 .map(e -> htmlNormalizer.htmlToReadableText(e))
-                .collect(Collectors.joining("\n"))
-                .trim();
+                .map(t -> htmlNormalizer.normalizeLines(t))
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .distinct()
+                .collect(java.util.stream.Collectors.toList());
 
-        return htmlNormalizer.normalizeLines(merged);
+        if (parts.isEmpty()) return null;
+        if (parts.size() == 1) return parts.get(0);
+
+        // Für mehrere Werte (z. B. Listen) Zeilenweise zurückgeben.
+        return String.join("\n", parts);
     }
 
     public String sectionText(Document doc, String h2Text) {
