@@ -17,7 +17,7 @@ public class JobLinkScraper {
     @Value("${jobsDrv.baseUrl}")
     private String baseUrl;
 
-    @Value("${job-link-scarper.timeout}")
+    @Value("${job-link-scraper.timeout}")
     private int timeOut;
 
     @SneakyThrows(IOException.class)
