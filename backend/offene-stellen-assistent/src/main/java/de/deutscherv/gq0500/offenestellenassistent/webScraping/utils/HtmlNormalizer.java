@@ -32,13 +32,10 @@ public class HtmlNormalizer {
     }
 
     public String htmlToReadableText(Element node) {
-        // Arbeitskopie
         Element copy = node.clone();
 
-        // <br> zu Newlines
         copy.select("br").forEach(br -> br.after(new TextNode("\n")));
 
-        // Listenpunkte hübsch formatieren
         copy.select("ul, ol").forEach(list -> {
             boolean ordered = list.normalName().equals("ol");
             int[] counter = {1};
@@ -49,7 +46,6 @@ public class HtmlNormalizer {
             });
         });
 
-        // Absätze & Überschriften trennen
         copy.select("p, h1, h2, h3, h4, h5, h6").forEach(el -> el.appendChild(new TextNode("\n")));
 
         String withBreaks = copy.html().replaceAll("(?is)<[^>]+>", "");

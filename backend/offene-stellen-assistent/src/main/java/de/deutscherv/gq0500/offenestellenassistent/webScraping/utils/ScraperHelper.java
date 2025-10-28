@@ -29,13 +29,12 @@ public class ScraperHelper {
         );
 
         if (valueNodes.isEmpty()) {
-            // Fallback: ganzen Block ohne Label nehmen
+            // Fallback
             org.jsoup.nodes.Element copy = box.clone();
             copy.select("p.globalText.bold").remove();
             return htmlNormalizer.normalizeLines(htmlNormalizer.extractTextWithLineBreaks(copy));
         }
 
-        // 3) Texte extrahieren, normalisieren und deduplizieren
         java.util.List<String> parts = valueNodes.stream()
                 .map(e -> htmlNormalizer.htmlToReadableText(e))
                 .map(t -> htmlNormalizer.normalizeLines(t))
@@ -47,7 +46,6 @@ public class ScraperHelper {
         if (parts.isEmpty()) return null;
         if (parts.size() == 1) return parts.getFirst();
 
-        // Für mehrere Werte (z. B. Listen) Zeilenweise zurückgeben.
         return String.join("\n", parts);
     }
 
@@ -62,15 +60,13 @@ public class ScraperHelper {
     }
 
     public String extractFurtherInformation(Document doc) {
-        // Greift alle .field__item im Block mit H2 "Weitere Informationen"
         Elements items = doc.select(
                 ".textAreaContent:has(h2.jobTextHeader:matches(^\\s*Weitere Informationen\\s*$)) .field__item"
         );
         if (items.isEmpty()) return null;
 
-        // Mit deinem HtmlNormalizer in gut lesbaren Text konvertieren (Listen, Absätze etc.)
         return items.stream()
-                .map(htmlNormalizer::htmlToReadableText) // behält \n und -/1. für Listen bei
+                .map(htmlNormalizer::htmlToReadableText)
                 .map(htmlNormalizer::normalizeLines)
                 .collect(Collectors.joining("\n\n"))
                 .trim();
