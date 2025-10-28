@@ -2,6 +2,7 @@ package de.deutscherv.gq0500.offenestellenassistent.webScraping.utils;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
+import org.jsoup.parser.Parser;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +13,7 @@ public class HtmlNormalizer {
         String t = s.replace('\u00A0', ' ')
                 .replaceAll("[ \\t]+", " ")
                 .replaceAll(" *\n *", "\n")
-                .replaceAll("\n{3,}", "\n\n")
+                .replaceAll("\n{2,}", "\n")
                 .trim();
         return t;
     }
@@ -26,7 +27,9 @@ public class HtmlNormalizer {
         Element copy = node.clone();
         copy.select("br").forEach(br -> br.after(new TextNode("\n")));
         String raw = copy.html().replaceAll("(?is)<[^>]+>", "");
-        return raw;
+        String decoded = Parser.unescapeEntities(raw, false);
+
+        return normalizeLines(decoded);
     }
 
     public String htmlToReadableText(Element node) {
@@ -49,14 +52,13 @@ public class HtmlNormalizer {
 
         // Absätze & Überschriften trennen
         copy.select("p, h1, h2, h3, h4, h5, h6").forEach(el -> {
-            el.prependText("");
-            el.appendChild(new TextNode("\n\n"));
+            el.appendChild(new TextNode("\n"));
         });
 
-        // Alle HTML-Tags entfernen, unsere \n bleiben erhalten
-        String withBreaks = copy.html()
-                .replaceAll("(?is)<[^>]+>", "");
+        String withBreaks = copy.html().replaceAll("(?is)<[^>]+>", "");
 
-        return withBreaks;
+        String decoded = Parser.unescapeEntities(withBreaks, false);
+
+        return normalizeLines(decoded);
     }
 }
