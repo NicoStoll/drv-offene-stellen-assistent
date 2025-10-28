@@ -17,7 +17,7 @@ export class Sidenav {
 
   protected readonly chat = inject(Chat);
 
-  private readonly client = inject(Client);
+  public readonly client = inject(Client);
 
   messageControl = new FormControl('');
 
@@ -32,11 +32,13 @@ export class Sidenav {
       message: this.messageControl.value || ''
     });
 
-    this.client.askQuestion(this.messageControl.value || '').subscribe(resp => {
+    this.client.askQuestion(this.messageControl.value || '', this.chat.conversationId()).subscribe(resp => {
       this.chat.appendMessage({
         sender: Sender.BOT,
         message: resp.response
       });
+
+      this.chat.conversationId.set(resp.conversationId);
     })
     this.messageControl.reset();
 

@@ -12,8 +12,8 @@ export class Client {
 
   private readonly http: HttpClient = inject(HttpClient);
 
-  public askQuestion(question: string): Observable<PromptResponseModel> {
-    const prompt: PromptRequestModel = { prompt: question };
+  public askQuestion(question: string, conversationid: string): Observable<PromptResponseModel> {
+    const prompt: PromptRequestModel = { prompt: question, conversationId: conversationid };
     return this.http.post<any>(Client.url, prompt);
   }
 

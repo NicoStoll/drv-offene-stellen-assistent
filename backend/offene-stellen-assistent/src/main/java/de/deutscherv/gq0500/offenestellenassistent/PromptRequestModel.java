@@ -8,4 +8,6 @@ import lombok.Data;
 public class PromptRequestModel {
     
     private String prompt;
+
+    private String conversationId;
 }

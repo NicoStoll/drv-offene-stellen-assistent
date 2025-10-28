@@ -4,7 +4,6 @@ import {ClipboardButtonComponent, MarkdownComponent} from 'ngx-markdown';
 @Component({
   selector: 'app-bot-speech-bubble',
   imports: [
-    ClipboardButtonComponent,
     MarkdownComponent
   ],
   templateUrl: './bot-speech-bubble.html',
