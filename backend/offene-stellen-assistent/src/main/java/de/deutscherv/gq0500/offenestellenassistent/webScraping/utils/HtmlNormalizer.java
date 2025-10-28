@@ -10,12 +10,11 @@ public class HtmlNormalizer {
     public String normalizeLines(String s) {
         if (s == null) return null;
 
-        String t = s.replace('\u00A0', ' ')
+        return s.replace('\u00A0', ' ')
                 .replaceAll("[ \\t]+", " ")
                 .replaceAll(" *\n *", "\n")
                 .replaceAll("\n{2,}", "\n")
                 .trim();
-        return t;
     }
 
     public String normalizeSpaces(String s) {
@@ -51,9 +50,7 @@ public class HtmlNormalizer {
         });
 
         // Absätze & Überschriften trennen
-        copy.select("p, h1, h2, h3, h4, h5, h6").forEach(el -> {
-            el.appendChild(new TextNode("\n"));
-        });
+        copy.select("p, h1, h2, h3, h4, h5, h6").forEach(el -> el.appendChild(new TextNode("\n")));
 
         String withBreaks = copy.html().replaceAll("(?is)<[^>]+>", "");
 

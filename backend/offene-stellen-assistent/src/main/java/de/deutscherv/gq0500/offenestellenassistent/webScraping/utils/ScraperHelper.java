@@ -61,13 +61,11 @@ public class ScraperHelper {
         if (items.isEmpty()) return null;
 
         // Mit deinem HtmlNormalizer in gut lesbaren Text konvertieren (Listen, Absätze etc.)
-        String merged = items.stream()
+        return items.stream()
                 .map(htmlNormalizer::htmlToReadableText) // behält \n und -/1. für Listen bei
                 .map(htmlNormalizer::normalizeLines)
                 .collect(Collectors.joining("\n\n"))
                 .trim();
-
-        return merged;
     }
 
     public String textOrNull(Element e) {
