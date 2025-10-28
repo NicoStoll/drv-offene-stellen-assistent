@@ -31,16 +31,21 @@ public class JobLinkScraper {
                     .referrer("https://www.google.com")
                     .timeout(timeOut)
                     .get();
+            // all links on current side
+            List<String> currentLinks = doc.select("div.resultItem div.resultItemTop h3.globalHeader3 a[href]")
+                    .eachAttr("abs:href");
 
-            // read all "Mehr erfahren" Links
-            doc.select("a:matchesOwn(^\\s*Mehr erfahren\\s*$)")
-                    .forEach(a -> links.add(a.attr("abs:href")));
+            links.addAll(currentLinks);
 
-            // next Link für pagination
-            Element next = doc.selectFirst("a:matchesOwn(^\\s*Nächste Seite\\s*$)");
-            url = (next != null) ? next.attr("abs:href") : null;
+            // Navigate to next site
+            Element nextButton = doc.selectFirst("li.pager__item--next a[href]");
+            if (nextButton == null) {
+                break;
+            } else {
+                String nextHref = nextButton.attr("href");
+                url = baseUrl + nextHref;
+            }
         }
-
         return links;
     }
 }
