@@ -1,4 +1,4 @@
-package de.deutscherv.gq0500.offenestellenassistent.webScraping;
+package de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper;
 
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;

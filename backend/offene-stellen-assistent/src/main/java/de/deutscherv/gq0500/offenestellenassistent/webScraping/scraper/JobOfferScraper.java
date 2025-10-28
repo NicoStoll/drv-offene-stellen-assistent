@@ -1,5 +1,7 @@
-package de.deutscherv.gq0500.offenestellenassistent.webScraping;
+package de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper;
 
+import de.deutscherv.gq0500.offenestellenassistent.webScraping.models.JobOffer;
+import de.deutscherv.gq0500.offenestellenassistent.webScraping.utils.ScraperHelper;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

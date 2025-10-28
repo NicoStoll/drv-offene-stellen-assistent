@@ -1,8 +1,6 @@
-package de.deutscherv.gq0500.offenestellenassistent.webScraping;
+package de.deutscherv.gq0500.offenestellenassistent.webScraping.models;
 
 import lombok.Data;
-
-import javax.lang.model.element.NestingKind;
 
 @Data
 public class JobOffer {

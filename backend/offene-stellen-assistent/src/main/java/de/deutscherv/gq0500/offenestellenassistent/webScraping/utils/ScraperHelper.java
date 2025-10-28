@@ -1,6 +1,5 @@
-package de.deutscherv.gq0500.offenestellenassistent.webScraping;
+package de.deutscherv.gq0500.offenestellenassistent.webScraping.utils;
 
-import lombok.experimental.Helper;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

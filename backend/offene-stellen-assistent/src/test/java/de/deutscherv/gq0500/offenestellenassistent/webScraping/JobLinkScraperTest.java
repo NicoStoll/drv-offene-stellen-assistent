@@ -1,5 +1,6 @@
 package de.deutscherv.gq0500.offenestellenassistent.webScraping;
 
+import de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper.JobLinkScraper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
