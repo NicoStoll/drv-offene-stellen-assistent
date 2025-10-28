@@ -14,7 +14,7 @@ import java.io.IOException;
 @Component
 public class JobOfferScraper {
 
-    @Value("${jobLinkScraper.timeout}")
+    @Value("${job-link-scarper.timeout}")
     private Integer timeOut;
 
     @Autowired

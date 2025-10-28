@@ -14,10 +14,10 @@ import java.util.List;
 @Component
 public class JobLinkScraper {
 
-    @Value("${baseUrl_JobsDrv}")
+    @Value("${jobsDrv.baseUrl}")
     private String baseUrl;
 
-    @Value("${jobLinkScraper.timeout}")
+    @Value("${job-link-scarper.timeout}")
     private int timeOut;
 
     @SneakyThrows(IOException.class)
@@ -31,13 +31,13 @@ public class JobLinkScraper {
                     .referrer("https://www.google.com")
                     .timeout(timeOut)
                     .get();
-            // all links on current side
+            // all links on current page
             List<String> currentLinks = doc.select("div.resultItem div.resultItemTop h3.globalHeader3 a[href]")
                     .eachAttr("abs:href");
 
             links.addAll(currentLinks);
 
-            // Navigate to next site
+            // Navigate to next page
             Element nextButton = doc.selectFirst("li.pager__item--next a[href]");
             if (nextButton == null) {
                 break;
