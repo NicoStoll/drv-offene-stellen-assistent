@@ -43,8 +43,6 @@ public class JobOfferScraperTest {
     @Test
     public void setJobOfferScraperAllTest() {
         List<String> links = jobLinkScraper.fetchAllListingLinks();
-        links.forEach(link -> {
-            jobOfferScraper.scrapeOpenJobOffer(link);
-        });
+        links.forEach(link -> jobOfferScraper.scrapeOpenJobOffer(link));
     }
 }
