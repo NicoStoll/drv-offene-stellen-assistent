@@ -3,7 +3,7 @@ package de.deutscherv.gq0500.offenestellenassistent.webScraping;
 import lombok.Data;
 
 @Data
-public class OpenJobOffersDto {
+public class OpenJobOffers {
     String title;
     String location;
     String entryDate;
@@ -11,7 +11,7 @@ public class OpenJobOffersDto {
     String compensation;
     String typeOfEmployment; // Vollzeit/Teilzeit
     String tenderNumber;
-    
+
     String tasks;
     String areaOfActivity;
     String applicationProfile;
