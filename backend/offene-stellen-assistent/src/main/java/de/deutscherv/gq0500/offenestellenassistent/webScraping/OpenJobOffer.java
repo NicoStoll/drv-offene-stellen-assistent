@@ -3,7 +3,7 @@ package de.deutscherv.gq0500.offenestellenassistent.webScraping;
 import lombok.Data;
 
 @Data
-public class OpenJobOffers {
+public class OpenJobOffer {
     String title;
     String location;
     String entryDate;
