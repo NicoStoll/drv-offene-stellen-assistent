@@ -1,0 +1,33 @@
+2025-10-28T12:26:34.897+01:00  INFO 482345 --- [main] c.h.a.c.CustomScannersServiceApplication : Starting CustomScannersServiceApplication v1.1.3 using Java 21.0.8 with PID 482345 (/home/nicolas/.vscode/extensions/hcltechnologies.hclappscancodesweep-1.5.1/lib/custom-scanners-service-1.1.3.jar started by nicolas in /home/nicolas/Dokumente/OffeneStellenAssistent/frontend)
+2025-10-28T12:26:34.921+01:00  INFO 482345 --- [main] c.h.a.c.CustomScannersServiceApplication : No active profile set, falling back to 1 default profile: "default"
+2025-10-28T12:26:37.702+01:00  INFO 482345 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 9221 (http)
+2025-10-28T12:26:37.741+01:00  INFO 482345 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-28T12:26:37.742+01:00  INFO 482345 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-28T12:26:37.798+01:00  INFO 482345 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-28T12:26:37.799+01:00  INFO 482345 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2542 ms
+2025-10-28T12:26:37.979+01:00 DEBUG 482345 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping filters: webMvcObservationFilter urls=[/*] order=-2147483647, characterEncodingFilter urls=[/*] order=-2147483648, formContentFilter urls=[/*] order=-9900, requestContextFilter urls=[/*] order=-105
+2025-10-28T12:26:37.980+01:00 DEBUG 482345 --- [main] o.s.b.w.s.ServletContextInitializerBeans : Mapping servlets: dispatcherServlet urls=[/]
+2025-10-28T12:26:38.034+01:00 DEBUG 482345 --- [main] o.s.w.f.ServerHttpObservationFilter      : Filter 'webMvcObservationFilter' configured for use
+2025-10-28T12:26:39.063+01:00  INFO 482345 --- [main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-10-28T12:26:39.223+01:00 DEBUG 482345 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 23 mappings in 'requestMappingHandlerMapping'
+2025-10-28T12:26:39.340+01:00 DEBUG 482345 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-10-28T12:26:39.391+01:00 DEBUG 482345 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-10-28T12:26:39.449+01:00 DEBUG 482345 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-10-28T12:26:39.809+01:00  INFO 482345 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-10-28T12:26:39.894+01:00  INFO 482345 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 9221 (http) with context path '/'
+2025-10-28T12:26:39.911+01:00  INFO 482345 --- [main] c.h.a.c.CustomScannersServiceApplication : Started CustomScannersServiceApplication in 5.953 seconds (process running for 6.785)
+2025-10-28T12:26:40.022+01:00  INFO 482345 --- [http-nio-9221-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-28T12:26:40.022+01:00  INFO 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-28T12:26:40.022+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-10-28T12:26:40.022+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected CookieLocaleResolver
+2025-10-28T12:26:40.022+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected CookieThemeResolver
+2025-10-28T12:26:40.023+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@26217d99
+2025-10-28T12:26:40.024+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@2a8c13c1
+2025-10-28T12:26:40.025+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-10-28T12:26:40.025+01:00  INFO 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-10-28T12:26:40.048+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/v1/scanRules", parameters={}
+2025-10-28T12:26:40.056+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.hcl.appscan.customscannersservice.controller.CustomScannersController#getScanRules(String[])
+2025-10-28T12:26:40.091+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [application/json, text/plain, */*] and supported [application/json]
+2025-10-28T12:26:40.105+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{Golang={com.ouncelabs.languagelite.golang.rules.WeakCryptoGolang=CustomScannersServiceScanRule{rule (truncated)...]
+2025-10-28T12:26:40.268+01:00 DEBUG 482345 --- [http-nio-9221-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-10-28T12:26:40.530+01:00  INFO 482345 --- [Thread-0] c.h.a.s.s.services.ArticleResource       : Completed reading English articles
