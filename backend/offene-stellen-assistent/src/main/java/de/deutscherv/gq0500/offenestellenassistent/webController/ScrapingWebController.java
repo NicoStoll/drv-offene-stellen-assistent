@@ -33,11 +33,25 @@ public class ScrapingWebController {
         long start = System.currentTimeMillis();
         AtomicInteger counter = new AtomicInteger(0);
 
-        List<String> links = jobLinkScraper.fetchAllListingLinks().stream().peek(link -> log.atInfo().log("Found Link {}: {}", counter.getAndIncrement(), link)).toList();
+        List<String> links = jobLinkScraper.fetchAllListingLinks()
+                                           .stream()
+                                           .peek(link -> log.atInfo()
+                                                            .log("Found Link {}: {}", counter.getAndIncrement(), link))
+                                           .toList();
         counter.set(0);
-        List<JobOffer> jobOffers = links.stream().map(link -> jobOfferScraper.scrapeOpenJobOffer(link)).peek(jobOffer -> log.atInfo().log("Found JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle())).toList();
+        List<JobOffer> jobOffers = links.stream()
+                                        .map(link -> jobOfferScraper.scrapeOpenJobOffer(link))
+                                        .peek(jobOffer -> log.atInfo()
+                                                             .log("Found JobOffer {}: {}", counter.getAndIncrement(),
+                                                                  jobOffer.getTitle()))
+                                        .toList();
         counter.set(0);
-        jobOffers.stream().peek(jobOffer -> log.atInfo().log("Embedding JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle())).map(JobOffer::toString).map(Document::new).map(List::of).forEach(vectorStore::add);
+        jobOffers.stream()
+                 .peek(jobOffer -> log.atInfo()
+                                      .log("Embedding JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle()))
+                 .map(jobOffer -> new Document(jobOffer.toString(), jobOffer.toMap()))
+                 .map(List::of)
+                 .forEach(vectorStore::add);
 
         double durationSeconds = (System.currentTimeMillis() - start) / 1000.0;
         log.atInfo().log("Embedding completed in {} seconds", durationSeconds);

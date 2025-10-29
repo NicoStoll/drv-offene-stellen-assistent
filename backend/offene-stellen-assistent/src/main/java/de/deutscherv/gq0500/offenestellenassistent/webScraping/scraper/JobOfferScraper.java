@@ -16,24 +16,23 @@ import java.io.IOException;
 @Slf4j
 public class JobOfferScraper {
 
-    @Value("${job-link-scraper.timeout}")
-    private Integer timeOut;
-
     @Autowired
     ScraperHelper helper;
+
+    @Value("${job-link-scraper.timeout}")
+    private Integer timeOut;
 
     @SneakyThrows(IOException.class)
     public JobOffer scrapeOpenJobOffer(String url) {
         Document doc = Jsoup.connect(url)
-                .userAgent("DRV-Scraper/1.0 (+contact: contact@deutscherv.de)")
-                .referrer("https://www.google.com")
-                .timeout(timeOut)
-                .get();
-
-        return parse(doc);
+                            .userAgent("DRV-Scraper/1.0 (+contact: contact@deutscherv.de)")
+                            .referrer("https://www.google.com")
+                            .timeout(timeOut)
+                            .get();
+        return parse(doc, url);
     }
 
-    public JobOffer parse(Document doc) {
+    public JobOffer parse(Document doc, String url) {
         JobOffer dto = new JobOffer();
 
         dto.setTitle(helper.textOrNull(doc.selectFirst("h1.jobAdMIHdr")));
@@ -49,6 +48,7 @@ public class JobOfferScraper {
         dto.setAreaOfActivity(helper.sectionText(doc, "Tätigkeitsbereich"));
         dto.setApplicationProfile(helper.sectionText(doc, "Profil"));
         dto.setFurtherInformation(helper.extractFurtherInformation(doc));
+        dto.setLink(url);
 
         return dto;
     }
