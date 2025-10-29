@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class PromptResponseModel {
 
+    private String messageId;
+
     private String response;
 
     private String conversationId;
