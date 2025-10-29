@@ -24,7 +24,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="de.stoll.nicolas" level="debug"/>
+        <Logger name="deutscherv.gq0500.offenestellenassistent" level="debug"/>
         <Logger name="org.springframework.web" level="info" additivity="false">
             <AppenderRef ref="STDOUT"/>
         </Logger>
