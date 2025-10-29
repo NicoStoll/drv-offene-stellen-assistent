@@ -32,6 +32,7 @@ public class ScrapingWebController {
 
     @PostMapping
     public String updateContext() {
+        long start = System.currentTimeMillis();
         AtomicInteger counter = new AtomicInteger(0);
 
         List<String> links = jobLinkScraper.fetchAllListingLinks().stream().peek(link -> log.atInfo().log("Found Link {}: {}", counter.getAndIncrement(), link)).toList();
@@ -43,8 +44,10 @@ public class ScrapingWebController {
                 .map(jobOffer -> embeddingModel.embed(jobOffer.toString()))
                 .toList();
 
-        log.atInfo().log(Arrays.toString(embeddings.getFirst()));
+        double durationSeconds = (System.currentTimeMillis() - start) / 1000.0;
+        log.atInfo().log("Embedding completed in {:.3f} seconds", durationSeconds);
 
-        return "Filled Context from " + links.size() + " job offers";
+        log.atInfo().log(Arrays.toString(embeddings.getFirst()));
+        return "Filled Context from " + links.size() + " job offers\nDuration: " + durationSeconds;
     }
 }
