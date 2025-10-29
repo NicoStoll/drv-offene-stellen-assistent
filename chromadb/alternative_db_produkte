@@ -1,0 +1,6 @@
+Andere Vektor DB Produkte, alle bieten nach eigenen Angaben RAG-Unterstützung "out-of-the-box":
+    FAISS, ein Open Source Produkt von Meta
+    Pinecone, eine kommerzielle Lösung mit Option auf kostenloses Ausprobieren
+    Weaviate, ein Open Source Produkt
+    tiny-vectordb, MIT Lizenz
+    Simple Vector DB, MIT Lizenz, mit Fokus auf RestFul API Integration
