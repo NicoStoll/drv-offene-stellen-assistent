@@ -1,7 +1,12 @@
-package de.deutscherv.gq0500.offenestellenassistent;
+package de.deutscherv.gq0500.offenestellenassistent.webController;
 
+import de.deutscherv.gq0500.offenestellenassistent.PromptRequestModel;
+import de.deutscherv.gq0500.offenestellenassistent.PromptResponseModel;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/ask")
