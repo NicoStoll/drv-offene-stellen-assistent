@@ -48,6 +48,8 @@ public class JobOfferScraper {
         dto.setApplicationProfile(helper.sectionText(doc, "Profil"));
         dto.setFurtherInformation(helper.extractFurtherInformation(doc));
 
+        System.out.println(dto.getTitle());
+
         return dto;
     }
 
