@@ -3,6 +3,7 @@ package de.deutscherv.gq0500.offenestellenassistent.webScraping;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.models.JobOffer;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper.JobLinkScraper;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper.JobOfferScraper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest
+@Slf4j
 public class JobOfferScraperTest {
 
     @Autowired
@@ -24,7 +26,7 @@ public class JobOfferScraperTest {
     @Test
     public void jobOfferScraperSpecificTest() {
         JobOffer jobOffer = jobOfferScraper.scrapeOpenJobOffer("https://drv-bund-karriere.de/jobs/oracle-administrator-berlin");
-        System.out.println(jobOffer);
+        log.atInfo().log(jobOffer.toString());
 
         assertThat(jobOffer.getTitle(), is("Oracle Administrator (m/w/div)"));
         assertThat(jobOffer.getLocation(), is("Berlin"));
@@ -43,6 +45,6 @@ public class JobOfferScraperTest {
     @Test
     public void setJobOfferScraperAllTest() {
         List<String> links = jobLinkScraper.fetchAllListingLinks();
-        links.forEach(link -> jobOfferScraper.scrapeOpenJobOffer(link));
+        // links.forEach(link -> jobOfferScraper.scrapeOpenJobOffer(link));
     }
 }
