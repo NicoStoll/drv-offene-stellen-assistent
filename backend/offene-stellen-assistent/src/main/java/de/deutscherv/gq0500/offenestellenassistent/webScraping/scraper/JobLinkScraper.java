@@ -48,6 +48,8 @@ public class JobLinkScraper {
                 url = baseUrl + nextHref;
             }
         }
+        log.atInfo().log("Found {} links:", links.size());
+        links.stream().forEach(link -> log.atInfo().log(link));
         return links;
     }
 }

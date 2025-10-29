@@ -50,7 +50,7 @@ public class JobOfferScraper {
         dto.setApplicationProfile(helper.sectionText(doc, "Profil"));
         dto.setFurtherInformation(helper.extractFurtherInformation(doc));
 
-        log.atInfo().log(dto.getTitle());
+        log.atInfo().log("Found JobOffer: {}", dto.getTitle());
 
         return dto;
     }
