@@ -45,9 +45,9 @@ public class ScrapingWebController {
                 .toList();
 
         double durationSeconds = (System.currentTimeMillis() - start) / 1000.0;
-        log.atInfo().log("Embedding completed in {:.3f} seconds", durationSeconds);
+        log.atInfo().log("Embedding completed in {} seconds", durationSeconds);
 
         log.atInfo().log(Arrays.toString(embeddings.getFirst()));
-        return "Filled Context from " + links.size() + " job offers\nDuration: " + durationSeconds;
+        return "Filled Context from " + links.size() + " job offers\nDuration: " + durationSeconds + " sec.";
     }
 }
