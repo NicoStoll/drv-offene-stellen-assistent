@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/updateContext")
@@ -31,11 +32,14 @@ public class ScrapingWebController {
 
     @PostMapping
     public String updateContext() {
+        AtomicInteger counter = new AtomicInteger(0);
 
-        List<String> links = jobLinkScraper.fetchAllListingLinks();
-        List<JobOffer> jobOffers = links.stream().map(link -> jobOfferScraper.scrapeOpenJobOffer(link)).toList();
+        List<String> links = jobLinkScraper.fetchAllListingLinks().stream().peek(link -> log.atInfo().log("Found Link {}: {}", counter.getAndIncrement(), link)).toList();
+        counter.set(0);
+        List<JobOffer> jobOffers = links.stream().map(link -> jobOfferScraper.scrapeOpenJobOffer(link)).peek(jobOffer -> log.atInfo().log("Found JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle())).toList();
+        counter.set(0);
         List<float[]> embeddings = jobOffers.stream()
-                .peek(jobOffer -> log.atInfo().log("Embedding JobOffer: {}", jobOffer.getTitle()))
+                .peek(jobOffer -> log.atInfo().log("Embedding JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle()))
                 .map(jobOffer -> embeddingModel.embed(jobOffer.toString()))
                 .toList();
 
