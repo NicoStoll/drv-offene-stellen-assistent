@@ -4,14 +4,13 @@ import de.deutscherv.gq0500.offenestellenassistent.webScraping.models.JobOffer;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper.JobLinkScraper;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper.JobOfferScraper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,9 +25,8 @@ public class ScrapingWebController {
     @Autowired
     JobOfferScraper jobOfferScraper;
 
-    @Qualifier("embeddingModel")
     @Autowired
-    EmbeddingModel embeddingModel;
+    VectorStore vectorStore;
 
     @PostMapping
     public String updateContext() {
@@ -39,15 +37,11 @@ public class ScrapingWebController {
         counter.set(0);
         List<JobOffer> jobOffers = links.stream().map(link -> jobOfferScraper.scrapeOpenJobOffer(link)).peek(jobOffer -> log.atInfo().log("Found JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle())).toList();
         counter.set(0);
-        List<float[]> embeddings = jobOffers.stream()
-                .peek(jobOffer -> log.atInfo().log("Embedding JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle()))
-                .map(jobOffer -> embeddingModel.embed(jobOffer.toString()))
-                .toList();
+        jobOffers.stream().peek(jobOffer -> log.atInfo().log("Embedding JobOffer {}: {}", counter.getAndIncrement(), jobOffer.getTitle())).map(JobOffer::toString).map(jobOffer -> new Document(jobOffer)).map(List::of).forEach(vectorStore::add);
 
         double durationSeconds = (System.currentTimeMillis() - start) / 1000.0;
         log.atInfo().log("Embedding completed in {} seconds", durationSeconds);
 
-        log.atInfo().log(Arrays.toString(embeddings.getFirst()));
         return "Filled Context from " + links.size() + " job offers\nDuration: " + durationSeconds + " sec.";
     }
 }
