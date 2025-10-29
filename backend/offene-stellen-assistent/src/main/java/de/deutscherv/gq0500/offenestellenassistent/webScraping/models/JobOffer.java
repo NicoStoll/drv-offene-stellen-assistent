@@ -23,12 +23,21 @@ public class JobOffer {
     String link;
 
     public Map<String, Object> toMap() {
-        return Map.ofEntries(Map.entry("title", title), Map.entry("location", location),
-                             Map.entry("entryDate", entryDate), Map.entry("applicationDeadline", applicationDeadline),
-                             Map.entry("compensation", compensation), Map.entry("typeOfEmployment", typeOfEmployment),
-                             Map.entry("tenderNumber", tenderNumber), Map.entry("tasks", tasks),
-                             Map.entry("areaOfActivity", areaOfActivity),
-                             Map.entry("applicationProfile", applicationProfile),
-                             Map.entry("furtherInformation", furtherInformation), Map.entry("link", link));
+        Map<String, Object> map = new java.util.LinkedHashMap<>();
+
+        if (title != null) map.put("title", title);
+        if (location != null) map.put("location", location);
+        if (entryDate != null) map.put("entryDate", entryDate);
+        if (applicationDeadline != null) map.put("applicationDeadline", applicationDeadline);
+        if (compensation != null) map.put("compensation", compensation);
+        if (typeOfEmployment != null) map.put("typeOfEmployment", typeOfEmployment);
+        if (tenderNumber != null) map.put("tenderNumber", tenderNumber);
+        if (tasks != null) map.put("tasks", tasks);
+        if (areaOfActivity != null) map.put("areaOfActivity", areaOfActivity);
+        if (applicationProfile != null) map.put("applicationProfile", applicationProfile);
+        if (furtherInformation != null) map.put("furtherInformation", furtherInformation);
+        if (link != null) map.put("link", link);
+
+        return map;
     }
 }
