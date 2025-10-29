@@ -1,6 +1,7 @@
 package de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class JobLinkScraper {
 
     @Value("${jobsDrv.baseUrl}")
@@ -46,6 +48,7 @@ public class JobLinkScraper {
                 url = baseUrl + nextHref;
             }
         }
+        log.atInfo().log("Found {} links", links.size());
         return links;
     }
 }

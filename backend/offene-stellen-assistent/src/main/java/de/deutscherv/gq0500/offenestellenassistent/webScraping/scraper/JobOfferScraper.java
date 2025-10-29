@@ -3,6 +3,7 @@ package de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.models.JobOffer;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.utils.ScraperHelper;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class JobOfferScraper {
 
     @Value("${job-link-scraper.timeout}")
@@ -47,8 +49,6 @@ public class JobOfferScraper {
         dto.setAreaOfActivity(helper.sectionText(doc, "Tätigkeitsbereich"));
         dto.setApplicationProfile(helper.sectionText(doc, "Profil"));
         dto.setFurtherInformation(helper.extractFurtherInformation(doc));
-
-        System.out.println(dto.getTitle());
 
         return dto;
     }
