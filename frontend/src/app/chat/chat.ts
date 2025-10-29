@@ -8,6 +8,8 @@ export class Chat {
 
   isOpen = signal<boolean>(false);
 
+  conversationId = signal<string>('');
+
   chatHistory = signal<Message[]>([
     {
       sender: Sender.BOT,
