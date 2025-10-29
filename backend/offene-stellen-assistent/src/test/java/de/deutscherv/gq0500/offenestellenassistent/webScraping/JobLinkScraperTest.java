@@ -22,7 +22,7 @@ public class JobLinkScraperTest {
     @Test
     public void testScrapeJobLink() {
         List<String> links = jobLinkScraper.fetchAllListingLinks();
-        log.atInfo().log("Open Job offers: $s", links.size());
+        log.atInfo().log("Open Job offers: {}", links.size());
         links.forEach(link -> log.atInfo().log(link));
         assertThat(links.size(), is(greaterThan(160)));
     }
