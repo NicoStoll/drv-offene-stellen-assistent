@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="5">
+    <Properties>
+        <Property name="LOG_LOC">logs</Property>
+        <Property name="MAX">5</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c{1} - %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="FILE"
+                     fileName="${LOG_LOC}/main.log"
+                     filePattern="${LOG_LOC}/main.%i.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${MAX}"/>
+        </RollingFile>
+
+        <Console name="STDOUT" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="de.stoll.nicolas" level="debug"/>
+        <Logger name="org.springframework.web" level="info" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+
+        <Logger name="file" level="debug" additivity="false">
+            <AppenderRef ref="FILE"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="FILE"/>
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>
