@@ -3,6 +3,7 @@ package de.deutscherv.gq0500.offenestellenassistent;
 import de.deutscherv.gq0500.offenestellenassistent.memory.IMemoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -19,11 +20,14 @@ public class DemoAiController {
 
     private final IMemoryService chatMemory;
 
-    public DemoAiController(ChatClient.Builder builder, IMemoryService chatMemory) {
+    private final QuestionAnswerAdvisor advisor;
+
+    public DemoAiController(ChatClient.Builder builder, IMemoryService chatMemory, QuestionAnswerAdvisor advisor) {
         this.chatClient = builder
                 .build();
 
         this.chatMemory = chatMemory;
+        this.advisor = advisor;
     }
 
     @PostMapping
@@ -37,6 +41,7 @@ public class DemoAiController {
 
         String response = this.chatClient
                 .prompt()
+                .advisors(advisor)
                 .messages(history)
                 .user(prompt.getPrompt())
                 .call()
@@ -65,6 +70,7 @@ public class DemoAiController {
         return chatClient.prompt()
                 .messages(history)
                 .user(prompt)
+                .advisors(advisor)
                 .stream()
                 .content()
                 .doOnNext(responseBuffer::append)
