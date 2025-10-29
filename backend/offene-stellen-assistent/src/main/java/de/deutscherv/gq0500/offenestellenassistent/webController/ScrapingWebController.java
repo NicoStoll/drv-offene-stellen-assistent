@@ -1,5 +1,6 @@
 package de.deutscherv.gq0500.offenestellenassistent.webController;
 
+import de.deutscherv.gq0500.offenestellenassistent.webScraping.models.JobOffer;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper.JobLinkScraper;
 import de.deutscherv.gq0500.offenestellenassistent.webScraping.scraper.JobOfferScraper;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -31,9 +33,13 @@ public class ScrapingWebController {
     public String updateContext() {
 
         List<String> links = jobLinkScraper.fetchAllListingLinks();
-        links.stream().map(link -> jobOfferScraper.scrapeOpenJobOffer(link)).map(jobOffer -> embeddingModel.embed(jobOffer.toString()));
+        List<JobOffer> jobOffers = links.stream().map(link -> jobOfferScraper.scrapeOpenJobOffer(link)).toList();
+        List<float[]> embeddings = jobOffers.stream()
+                .peek(jobOffer -> log.atInfo().log("Embedding JobOffer: {}", jobOffer.getTitle()))
+                .map(jobOffer -> embeddingModel.embed(jobOffer.toString()))
+                .toList();
 
-        log.atInfo().log(links.getFirst());
+        log.atInfo().log(Arrays.toString(embeddings.getFirst()));
 
         return "Filled Context from " + links.size() + " job offers";
     }
