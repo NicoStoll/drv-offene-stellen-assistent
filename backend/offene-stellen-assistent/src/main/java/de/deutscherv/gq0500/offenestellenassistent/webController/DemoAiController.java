@@ -1,5 +1,7 @@
-package de.deutscherv.gq0500.offenestellenassistent;
+package de.deutscherv.gq0500.offenestellenassistent.webController;
 
+import de.deutscherv.gq0500.offenestellenassistent.PromptRequestModel;
+import de.deutscherv.gq0500.offenestellenassistent.PromptResponseModel;
 import de.deutscherv.gq0500.offenestellenassistent.memory.IMemoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;

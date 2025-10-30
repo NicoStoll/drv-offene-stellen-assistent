@@ -2,11 +2,9 @@ package de.deutscherv.gq0500.offenestellenassistent.db;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.chroma.vectorstore.ChromaApi;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -16,45 +14,25 @@ import java.util.Map;
 @Configuration
 public class ChromaStartupScript {
 
-    private final ChromaApi chromaApi;
 
     private final VectorStore vectorStore;
 
-    public ChromaStartupScript(ChromaApi chromaApi, VectorStore vectorStore) {
-        this.chromaApi = chromaApi;
+    public ChromaStartupScript(VectorStore vectorStore) {
         this.vectorStore = vectorStore;
     }
 
-    @Value("${spring.ai.vectorstore.chroma.tenant-name}")
-    private String tenantName;
-
-    @Value("${spring.ai.vectorstore.chroma.database-name}")
-    private String databaseName;
-
     @PostConstruct
     public void initChroma() {
-        // Create database if it doesn't exist
-        try {
-            final String db = chromaApi.getDatabase(tenantName, databaseName).name();
-            log.info(db);
-        } catch (Exception e) {
-            chromaApi.createDatabase(tenantName, databaseName);
-        }
-
-        // Create collection if it doesn't exist
-        String collectionName = "SpringAiCollection"; // default used by ChromaVectorStore
-        try {
-            chromaApi.getCollection(tenantName, databaseName, collectionName);
-        } catch (Exception e) {
-            chromaApi.createCollection(
-                    tenantName,
-                    databaseName,
-                    new ChromaApi.CreateCollectionRequest(collectionName)
-            );
-        }
-
-
         sanityCheck();
+        sanityCheck2();
+    }
+
+    private void sanityCheck2() {
+        // === Second sanity check: count all documents in the collection ===
+        List<Document> allDocs = this.vectorStore.similaritySearch(
+                SearchRequest.builder().query("").topK(1000).build() // assuming <1000 docs
+        );
+        log.info("Total number of documents in the database: {}", allDocs.size());
     }
 
     private void sanityCheck() {

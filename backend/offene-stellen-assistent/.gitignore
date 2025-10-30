@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/chroma-data
+/chroma-data2
+/chromadata
+
+/logs

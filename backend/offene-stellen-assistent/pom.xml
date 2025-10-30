@@ -58,7 +58,7 @@
 
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-vector-store-chroma</artifactId>
+            <artifactId>spring-ai-starter-vector-store-redis</artifactId>
         </dependency>
 
         <dependency>
